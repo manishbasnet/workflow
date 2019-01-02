@@ -107,6 +107,78 @@
         </div>
     </body>--}}
 
+    {{--$("#posts").on("click", "th", function(e) {
+                            var index = $(this).index();
+                            console.log(index);
+                            var table = $(this).closest("table");
+                            console.log(table.find("#header th").eq(index).text());
+                            var defaultSelected = index;
+                            table.siblings().find("#header th").find("a.filter-icon").remove();
+                            if (table.find("#header th").find(".filter-icon").length == 0) {
+                                table.find("#header th").first().append(`<a class="filter-icon" href="#myModal" data-backdrop="false" data-toggle="modal"><span class="glyphicon glyphicon-filter campaign-header"></span></a>`);
+                            }
+                            $(".campaign-header").on("click", function(){
+                                        $(".example").append(`
+                                            <div id="myModal" class="modal fade Report-V2modal">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                            <h4 class="modal-title">Filter column</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="comment">
+                                                            <div class="table-controls">
+                                                            <span>
+                                                                      <label>Field: </label>
+                                                                      <select id="filter-field" class="form-control">
+
+                                                                      </select>
+                                                                    </span>
+                                                                    <span>
+                                                                      <label>Type: </label>
+                                                                      <select id="filter-type" class="form-control">
+                                                                          <option value="=">=</option>
+                                                                          <option value="<">&lt;</option>
+                                                                          <option value="<=">&lt;=</option>
+                                                                          <option value=">">&gt;</option>
+                                                                          <option value=">=">&gt;=</option>
+                                                                          <option value="!=">!=</option>
+                                                                          <option value="like">like</option>
+                                                                      </select>
+                                                                    </span>
+                                                                    <span><label>Value: </label> <input id="filter-value" type="text" placeholder="value to filter" class="form-control"></span>
+                                                                        <div class="modal-footer">
+                                                                            <button id="filter-clear" type="button" class="btn btn-default" data-dismiss="modal">Clear Filter</button>
+                                                                            <button id="filter-ok" type="button" class="btn btn-primary" data-dismiss="modal">Filter</button>
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            `);
+                                            $("#filter-field").children().remove();
+                                            /*for(let c in keyValue){
+                                                $("#filter-field").append($("<option>",{value: c,text: keyValue[c]}))
+                                            }*/
+                                            var $filterIndex = 0;
+                                            $.each(keyValue, function(key, value) {
+                                               $("#filter-field")
+                                                .append($("<option>",{ value: $filterIndex})
+                                                .text(value));
+                                               //field.push($filterIndex);
+                                                //console.log(Options[c]);
+                                                $filterIndex = $filterIndex + 1;
+                                            });
+
+                                            $("#filter-field").val(defaultSelected);
+                                            //getTableFilter();
+                                                });
+                        });--}}
+
+
     <body>
     <table id="example" class="display" style="width:100%">
         <thead>
