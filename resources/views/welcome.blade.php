@@ -104,9 +104,7 @@
     </body>--}}
 
 
-    <body>
-
-
+   {{-- <body>--}}
     {{--<div class="container">
         <div class="example">
             <select id="multiselect-campaign" class="selectpicker" multiple="multiple">
@@ -114,8 +112,7 @@
         </div>
 
     </div>--}}
-
-    <div class="row">
+    {{--    <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered" id="posts">
                 <thead>
@@ -139,6 +136,13 @@
                 </tr>
 
                 </thead>
+                <tfoot>
+                <tr>
+                    <th>Account</th>
+                    <th>Specialist</th>
+                    <th>Source</th>
+                </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -151,6 +155,14 @@
 
 
         $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#posts tfoot th').each(function () {
+               var title = $(this).text();
+               //console.log(title);
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            });
+
+            // DataTable
             var table = $('#posts').DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -174,6 +186,21 @@
 
             });
 
+            // Apply the search
+            table.columns().every( function () {
+                var that = this;
+                console.log(that);
+                $('input', this.footer() ).on( 'keyup change', function () {
+                   if ( that.search() !== this.value ) {
+                       that
+                           .search( this.value )
+                           .draw();
+                   }
+                   /*console.log(that
+                       .search( this.value ));*/
+                });
+            });
+
 
             /*$('a.toggle-vis').on( 'click', function (e) {
                 e.preventDefault();
@@ -184,9 +211,7 @@
                 // Toggle the visibility
                 column.visible( ! column.visible() );
             } );*/
-
-
-            function hideColumn(multiSelectTable,Options,AllField)
+            /*function hideColumn(multiSelectTable,Options,AllField)
             {
                 $optionIndex = 0;
                 for(let c in Options){
@@ -242,12 +267,10 @@
                     }
                 });
             }
-
-            hideColumn("#multiselect-campaign",keyValue,field);
-
+            hideColumn("#multiselect-campaign",keyValue,field);*/
         });
     </script>
-    </body>
+    </body>--}}
 
 
 </html>
