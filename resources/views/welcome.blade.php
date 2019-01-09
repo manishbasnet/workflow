@@ -191,7 +191,7 @@
             <th>Salary</th>
         </tr>
         </thead>
-        <tbody>
+        {{--<tbody>
         <tr>
             <td>Tiger Nixon</td>
             <td>System Architect</td>
@@ -648,7 +648,7 @@
             <td>2011/01/25</td>
             <td>$112,000</td>
         </tr>
-        </tbody>
+        </tbody>--}}
         <tfoot>
         <tr>
             <th>Name</th>
@@ -662,6 +662,8 @@
     </table>
     </body>
 
+    <?php $data = storage_path('public/data.txt'); ?>
+
 <script>
     $(document).ready(function() {
         // Setup - add a text input to each footer cell
@@ -671,10 +673,36 @@
         } );
 
         // DataTable
-        var table = $('#example').DataTable();
+        var table = $('#example').DataTable({
+            "processing" : true,
+            "serverSide" : true,
+            "ajax" : {
+                "type" : "GET",
+                "url" : "localhost:9092/data",
+                "dataSrc": function ( json ) {
+                    //Make your callback here.
+                    alert("Done!");
+                    return json;
+                }
+            },
+            initComplete: function() {
+                var api = this.api();
+
+                // Apply the search
+                api.columns().every(function() {
+                    var that = this;
+
+                    $('input', this.footer()).on('keyup change', function () {
+                        that
+                            .search(this.value)
+                            .draw();
+                    });
+                });
+            }
+        });
 
         // Apply the search
-        table.columns().every( function () {
+        /*table.columns().every( function () {
             var that = this;
 
             $( 'input', this.footer() ).on( 'keyup change', function () {
@@ -684,7 +712,7 @@
                         .draw();
                 }
             } );
-        } );
+        } );*/
     } );
 </script>
 
